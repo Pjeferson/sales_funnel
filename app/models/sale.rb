@@ -1,7 +1,7 @@
 class Sale < ApplicationRecord
   enum stage: [:contact, :proposal, :follow_up, :closing, :closed, :lost]
 
-  has_many :progressions
+  has_many :progressions,-> { order(:created_at => :desc) }
 
   validates :product, :customer, :amount, :stage, presence: true
   validates_with SaleValidator

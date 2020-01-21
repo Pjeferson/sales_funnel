@@ -1,6 +1,11 @@
 class SalesController < ApplicationController
   helper_method :sale
 
+  def show
+    sale = Sale.find(params[:id])
+    render json: sale, include: 'progressions'
+  end
+
   def create
     sale = Sale.create_with_progression(sale_params)
 
