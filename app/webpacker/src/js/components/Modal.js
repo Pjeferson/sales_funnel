@@ -1,6 +1,4 @@
 import React from "react"
-import {format, parseISO} from 'date-fns'
-import pt from 'date-fns/locale/pt-BR';
 
 import cancelIcon from "images/cancel.png"
 import Currency from './Currency'
@@ -64,16 +62,10 @@ const Modal = (props) => {
               </div>
               <div>
                 <div className="text-right">
-                  {format(
-                    parseISO(progression.created_at),
-                    'dd/MM/yyyy',{ locale: pt }
-                  )}
+                  {progression.formattedDate}
                 </div>
                 <div className="text-right">
-                  {format(
-                    parseISO(progression.created_at),
-                    'HH:mm',{ locale: pt }
-                  )}
+                  {progression.formattedTime}
                 </div>
               </div>
             </li>

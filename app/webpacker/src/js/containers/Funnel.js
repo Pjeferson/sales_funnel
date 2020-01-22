@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
-import { differenceInDays, parseISO } from "date-fns"
+import { format,differenceInDays, parseISO } from "date-fns"
+import pt from 'date-fns/locale/pt-BR';
 import AddCardButton from "../components/AddCardButton"
 import Column from "../components/Column"
 import Toast from "../components/Toast"
@@ -89,7 +90,9 @@ const mapStateToProps = ({ columns, drag, form, notification, modal }) => (
           pastDays: index>0? diffBetweenDays(
             modal.sale.progressions[index-1].created_at,
             progression.created_at
-          ): null
+          ): null,
+          formattedDate: formatDate(progression.created_at),
+          formattedTime: formatTime(progression.created_at)
         }))
     },
     showModal: modal.show,
@@ -125,7 +128,22 @@ const diffBetweenDays = (firstDate, lastDate) => (
   differenceInDays(
     parseISO(firstDate),
     parseISO(lastDate)
-))
+  )
+)
+
+const formatDate = (date) => (
+  format(
+    parseISO(date),
+    'dd/MM/yyyy',{ locale: pt }
+  )
+)
+
+const formatTime = (date) => (
+  format(
+    parseISO(date),
+    'HH:mm',{ locale: pt }
+  )
+)
 
 export default connect(
   mapStateToProps,
