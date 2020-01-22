@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { differenceInDays, parseISO } from "date-fns"
 import AddCardButton from "../components/AddCardButton"
 import Column from "../components/Column"
 import Toast from "../components/Toast"
@@ -73,15 +74,24 @@ const mapStateToProps = ({ columns, drag, form, notification, modal }) => (
     }),
     stageTitles: columns.reduce((titlesMap, column) => {
       // Passing titles to the singular.
-      if(column.id === "closed")
-        titlesMap[column.id] = "Ganho"
-      else if(column.id === "lost")
-        titlesMap[column.id] = "Perdido"
-      else
-        titlesMap[column.id] = column.title
+      const singular = { closed: "Ganho", lost: "Perdido" }
+      
+      titlesMap[column.id] = singular[column.id] || column.title
+      
       return titlesMap
     }, {}),
-    sale: modal.sale,
+    // pastDays stores how many days a step lasted
+    sale: {
+      ...modal.sale,
+      progressions: modal.sale &&
+        modal.sale.progressions.map((progression, index) => ({
+          ...progression,
+          pastDays: index>0? diffBetweenDays(
+            modal.sale.progressions[index-1].created_at,
+            progression.created_at
+          ): null
+        }))
+    },
     showModal: modal.show,
     showForm: form.show,
     disableForm: form.waiting,
@@ -110,6 +120,12 @@ const mapDispatchToProps = dispatch => (
     onModalExit: () => dispatch(hideModal())
   }
 )
+
+const diffBetweenDays = (firstDate, lastDate) => (
+  differenceInDays(
+    parseISO(firstDate),
+    parseISO(lastDate)
+))
 
 export default connect(
   mapStateToProps,

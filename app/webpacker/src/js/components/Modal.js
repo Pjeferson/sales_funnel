@@ -1,5 +1,5 @@
 import React from "react"
-import {format, parseISO, differenceInDays} from 'date-fns'
+import {format, parseISO} from 'date-fns'
 import pt from 'date-fns/locale/pt-BR';
 
 import cancelIcon from "images/cancel.png"
@@ -23,7 +23,9 @@ const Modal = (props) => {
           <img className="height-100 brightness-10" src={cancelIcon} />
         </button>
         <div className="width-100">
-          <div className="text-white text-extra-larger text-bold margin-top-md">
+          <div className="text-white text-extra-larger text-bold
+            margin-top-md"
+          >
             {props.sale.product}
           </div>
           <div className="text-white text-medium margin-top-md">
@@ -35,7 +37,9 @@ const Modal = (props) => {
         </div>
       </div>
 
-      <div className="border-rounded-bottom bg-white padding-x-xxl padding-y-xl">
+      <div className="border-rounded-bottom bg-white
+        padding-x-xxl padding-y-xl"
+      >
         <ul className="no-margin-last">
           {props.sale.progressions.map((progression, index)=> (
             <li
@@ -50,12 +54,9 @@ const Modal = (props) => {
                 </strong>
                 <br />
                 <span className="text-gray">
-                  {index>0 &&
+                  {progression.pastDays &&
                     pluralize(
-                      differenceInDays(
-                        parseISO(props.sale.progressions[index-1].created_at),
-                        parseISO(progression.created_at)
-                      ), 
+                      progression.pastDays, 
                       "dia", 
                       "dias"
                   )}
