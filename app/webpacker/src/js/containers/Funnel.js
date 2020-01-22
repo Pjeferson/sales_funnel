@@ -78,7 +78,7 @@ const mapStateToProps = ({ columns, drag, form, notification, modal }) => (
       else if(column.id === "lost")
         titlesMap[column.id] = "Perdido"
       else
-      titlesMap[column.id] = column.title
+        titlesMap[column.id] = column.title
       return titlesMap
     }, {}),
     sale: modal.sale,

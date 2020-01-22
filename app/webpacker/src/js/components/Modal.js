@@ -11,7 +11,7 @@ const Modal = (props) => {
   return (
     props.show ? // Controlling the modal exhibition.
     <div className="border-rounded fixed translate-50 top-50 left-50
-      min-width-500 z-index-1 box-shadow-blurred"
+      min-width-550 z-index-1 box-shadow-blurred"
     >
       <div className="border-rounded-top bg-default padding-x-xxl padding-y-xl
         flex"
@@ -26,10 +26,10 @@ const Modal = (props) => {
           <div className="text-white text-extra-larger text-bold margin-top-md">
             {props.sale.product}
           </div>
-          <div className="text-white margin-top-md">
+          <div className="text-white text-medium margin-top-md">
             {props.sale.customer}
           </div>
-          <div className="text-white text-right margin-top-md">
+          <div className="text-white text-medium text-right margin-top-md">
             <Currency amount={props.sale.amount}/>
           </div>
         </div>
