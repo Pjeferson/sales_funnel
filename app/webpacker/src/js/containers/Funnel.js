@@ -3,10 +3,11 @@ import { connect } from "react-redux"
 import AddCardButton from "../components/AddCardButton"
 import Column from "../components/Column"
 import Toast from "../components/Toast"
+import Modal from "../components/Modal"
 import {
   showForm, hideForm, updateForm, submitForm,
   dragStart, dragEnd, dragEnter, dragLeave, dropStart, drop,
-  dismissNotification
+  dismissNotification, showModalRequest, hideModal
 } from "../actions"
 
 const Funnel = (props) => (
@@ -20,6 +21,12 @@ const Funnel = (props) => (
 
     <AddCardButton onClick={props.onClickAdd} />
 
+    <Modal
+      show={props.showModal}
+      sale={props.sale}
+      stageTitles={props.stageTitles}
+      onExit={props.onModalExit}
+    />
     <div className="flex margin-top-lg">
       {props.columns.map((column, index) =>
         <Column
@@ -39,13 +46,14 @@ const Funnel = (props) => (
           onDragEnter={props.onDragEnter}
           onDragLeave={props.onDragLeave}
           onDrop={props.onDrop}
+          onCardClick={props.onCardClick}
         />
       )}
     </div>
   </div>
 )
 
-const mapStateToProps = ({ columns, drag, form, notification }) => (
+const mapStateToProps = ({ columns, drag, form, notification, modal }) => (
   {
     columns: columns.map((column, index) => {
       if (index == drag.from)
@@ -63,6 +71,12 @@ const mapStateToProps = ({ columns, drag, form, notification }) => (
       else
         return column
     }),
+    stageTitles: columns.reduce((titlesMap, column) => {
+      titlesMap[column.id] = column.title
+      return titlesMap
+    }, {}),
+    sale: modal.sale,
+    showModal: modal.show,
     showForm: form.show,
     disableForm: form.waiting,
     notification: notification
@@ -85,7 +99,9 @@ const mapDispatchToProps = dispatch => (
       dispatch(dropStart(index))
       dispatch(drop())
     },
-    onDismissNotification: () => dispatch(dismissNotification())
+    onDismissNotification: () => dispatch(dismissNotification()),
+    onCardClick: (id) => dispatch(showModalRequest(id)),
+    onModalExit: () => dispatch(hideModal())
   }
 )
 
