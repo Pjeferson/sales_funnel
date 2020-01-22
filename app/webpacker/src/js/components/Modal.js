@@ -8,7 +8,9 @@ const Modal = (props) => {
 
   return (
     props.show ? // Controlling the modal exhibition.
-    <div className="border-rounded fixed translate-50 top-50 left-50
+    <div 
+      id="modal-progression"
+      className="border-rounded fixed translate-50 top-50 left-50
       min-width-550 z-index-1 box-shadow-blurred"
     >
       <div className="border-rounded-top bg-default padding-x-xxl padding-y-xl
@@ -16,6 +18,7 @@ const Modal = (props) => {
       >
         <button className="height-100 absolute top-0 right-0
           margin-top-lg  margin-right-lg"
+          title="Fechar Detalhes"
           onClick={props.onExit}
         >
           <img className="height-100 brightness-10" src={cancelIcon} />
