@@ -21,7 +21,7 @@ const Modal = (props) => {
           <img className="height-100 brightness-10" src={cancelIcon} />
         </button>
         <div className="width-100">
-          <div className="text-white text-larger text-bold margin-top-md">
+          <div className="text-white text-extra-larger text-bold margin-top-md">
             {props.sale.product}
           </div>
           <div className="text-white margin-top-md">
@@ -41,7 +41,7 @@ const Modal = (props) => {
               key={String(progression.id)}
             >
               <div>
-                <strong>{props.stageTitles[progression.stage]}</strong>
+                <strong className="text-larger">{props.stageTitles[progression.stage]}</strong>
                 <br />
                 <span className="text-gray">
                   {index>0 &&
