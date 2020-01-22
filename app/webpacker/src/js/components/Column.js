@@ -53,6 +53,7 @@ const Column = (props) => {
             dragged={card.dragged}
             onDragStart={props.onDragStart}
             onDragEnd={props.onDragEnd}
+            onClick={props.onCardClick}
           />
         )}
       </div>

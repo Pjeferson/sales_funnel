@@ -19,6 +19,10 @@ export const DROP_START = "DROP_START"
 export const INVALID_DROP = "INVALID_DROP"
 export const DISMISS_NOTIFICATION = "DISMISS_NOTIFICATION"
 
+export const SHOW_MODAL = "SHOW_MODAL"
+export const HIDE_MODAL = "HIDE_MODAL"
+export const DETAIL_SALE_ERROR = "DETAIL_SALE_ERROR"
+
 // Dispatched when the user clicks the button to add a new card.
 export const showForm = () => ({ type: SHOW_FORM })
 // Dispatched when the user cancels the creation of a card.
@@ -157,9 +161,44 @@ export const moveCard = (id, from, to) => (
 // Dispatched when the request to move a card fails.
 export const moveRequestError = () => ({ type: MOVE_REQUEST_ERROR })
 
+// Dispatched when the request to detail a sale fails.
+export const detailSaleError = () => ({type: DETAIL_SALE_ERROR})
+
 // Dispatched when the notification is dismissed; there's no button to dismiss 
 // it, so this happens automatically when the animation ends.
 export const dismissNotification = () => ({ type: DISMISS_NOTIFICATION })
+
+// Dispatched when the user clicks on a card in a column.
+export const showModalRequest = (card_id) => (
+  (dispatch) => {
+    fetch(`/sales/${card_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": readCsrfToken()
+      }
+    })
+    .then(
+      response => {
+        if (response.ok) {
+          response.json().then(json => {
+            dispatch(showModal(json))
+          })
+        }
+      },
+      error => {
+        dispatch(detailSaleError())
+      }
+    )
+  }
+)
+
+// Dispatched when sale information is returned; it's dispatched
+// inside the showModalRequest action.
+export const showModal = (sale) => ({ type: SHOW_MODAL, sale })
+
+// Dispatched when the modal is closed.
+export const hideModal = () => ({ type: HIDE_MODAL })
 
 // Required by rails controllers to avoid Cross Site Request Forgery (CSRF)
 const readCsrfToken = () =>

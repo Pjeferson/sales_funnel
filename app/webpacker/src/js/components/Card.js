@@ -19,6 +19,7 @@ const Card = (props) => {
       draggable="true"
       onDragStart={onDragStart}
       onDragEnd={() => props.onDragEnd(props.columnIndex, props.id)}
+      onClick={() => props.onClick(props.id)}
     >
       <div className="margin-top-sm margin-bottom-sm text-tight">
         {props.title}

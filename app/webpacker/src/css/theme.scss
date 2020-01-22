@@ -9,10 +9,13 @@
 
 .text-white   { color: white; }
 .text-success { color: #66cc34; }
+.text-failure { color: #b15759; }
 .text-gray    { color: #777; }
 .text-bold    { font-weight: bold; }
 .text-italic  { font-style: italic; }
+.text-medium  { font-size: 1.1em; }
 .text-larger  { font-size: 1.2em; }
+.text-extra-larger  { font-size: 2em; }
 .text-smaller { font-size: .95em; }
 .text-right   { text-align: right; }
 .text-center  { text-align: center; }
@@ -21,13 +24,23 @@
 .break-word { word-wrap: break-word; }
 
 .border-rounded { border-radius: $border-radius; }
+.border-rounded-top { 
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+.border-rounded-bottom { 
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
 .border-pill    { border-radius: 9999px; }
 
 .box-shadow       { box-shadow: 0 0 2px rgba(0, 0, 0, 0.15); }
 .box-shadow-inset { box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.15) inset; }
+.box-shadow-blurred { box-shadow: 0px 4px 20px 0px rgba(0,0,0,0.25); }
 
 .opacity-6      { opacity: 0.6; }
 .brightness-50  { filter: brightness(50%) }
+.brightness-10  { filter: brightness(10) }
 
 *[draggable="true"] { cursor: grab; }
 
