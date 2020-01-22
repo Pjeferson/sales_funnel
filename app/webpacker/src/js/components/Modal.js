@@ -7,31 +7,34 @@ import Currency from './Currency'
 
 const Modal = (props) => {
   return (
-    props.show ?
+    props.show ? // Controlling the modal exhibition.
     <div className="border-rounded fixed translate-50 top-50 left-50
       min-width-500 z-index-1 box-shadow-blurred"
     >
-      <div className="border-rounded-top bg-default padding-xl
-        flex space-between"
+      <div className="border-rounded-top bg-default padding-x-xxl padding-y-xl
+        flex"
       >
+        <button className="height-100 absolute top-0 right-0
+          margin-top-lg  margin-right-lg"
+          onClick={props.onExit}
+        >
+          <img className="height-100 brightness-10" src={cancelIcon} />
+        </button>
         <div className="width-100">
-          <div className="text-white text-larger text-bold">
+          <div className="text-white text-larger text-bold margin-top-md">
             {props.sale.product}
           </div>
-          <div className="text-white">
+          <div className="text-white margin-top-md">
             {props.sale.customer}
           </div>
-          <div className="text-white text-right">
+          <div className="text-white text-right margin-top-md">
             <Currency amount={props.sale.amount}/>
           </div>
         </div>
-        <button className="height-100" onClick={props.onExit}>
-          <img className="height-100 brightness-10" src={cancelIcon} />
-        </button>
       </div>
 
-      <div className="border-rounded-bottom bg-white padding-xl">
-        <ul>
+      <div className="border-rounded-bottom bg-white padding-x-xxl padding-y-xl">
+        <ul className="no-margin-last">
           {props.sale.progressions.map((progression, index)=> (
             <li
               className="flex space-between margin-bottom-xl"
