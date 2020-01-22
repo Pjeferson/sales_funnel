@@ -4,9 +4,16 @@
 
 .inline-block { display: inline-block; }
 
+.fixed    { position: fixed; }
 .absolute { position: absolute; }
 .top-0    { top: 0; }
 .left-0   { left: 0; }
+.top-50   { top: 50%; }
+.left-50  { left: 50%; }
+
+.z-index-1  { z-index: 1; }
+
+.translate-50 { transform: translateX(-50%) translateY(-50%); }
 
 .full-height  { min-height: 100vh; }
 .height-100   { height: 1em; }
@@ -15,6 +22,7 @@
 .width-100      { width: 100%; }
 .min-width-0    { min-width: 0; }
 .min-width-200  { min-width: 200px; }
+.min-width-500  { min-width: 500px; }
 .max-width-300  { max-width: 300px; }
 
 .vertical-align-middle { vertical-align: middle; }
@@ -30,7 +38,7 @@
 .margin-top-lg    { margin-top: $margin-lg; }
 
 .margin-right-xl  { margin-right: $margin-xl; }
-.margin-bottom-xl  { margin-bottom: $margin-xl; }
+.margin-bottom-xl { margin-bottom: $margin-xl; }
 
 .padding-md   { padding: $margin-md; }
 .padding-xl   { padding: $margin-xl; }
