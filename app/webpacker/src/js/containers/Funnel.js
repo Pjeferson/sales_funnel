@@ -72,6 +72,12 @@ const mapStateToProps = ({ columns, drag, form, notification, modal }) => (
         return column
     }),
     stageTitles: columns.reduce((titlesMap, column) => {
+      // Passing titles to the singular.
+      if(column.id === "closed")
+        titlesMap[column.id] = "Ganho"
+      else if(column.id === "lost")
+        titlesMap[column.id] = "Perdido"
+      else
       titlesMap[column.id] = column.title
       return titlesMap
     }, {}),

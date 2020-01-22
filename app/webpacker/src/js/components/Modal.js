@@ -6,6 +6,8 @@ import cancelIcon from "images/cancel.png"
 import Currency from './Currency'
 
 const Modal = (props) => {
+  const color = { closed: "text-success", lost: "text-failure" }
+
   return (
     props.show ? // Controlling the modal exhibition.
     <div className="border-rounded fixed translate-50 top-50 left-50
@@ -41,7 +43,11 @@ const Modal = (props) => {
               key={String(progression.id)}
             >
               <div>
-                <strong className="text-larger">{props.stageTitles[progression.stage]}</strong>
+                <strong
+                  className={`text-larger ${color[progression.stage]}`}
+                >
+                  {props.stageTitles[progression.stage]}
+                </strong>
                 <br />
                 <span className="text-gray">
                   {index>0 &&
