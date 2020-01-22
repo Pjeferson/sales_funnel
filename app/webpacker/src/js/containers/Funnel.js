@@ -1,7 +1,5 @@
 import React from "react"
 import { connect } from "react-redux"
-import { format,differenceInDays, parseISO } from "date-fns"
-import pt from 'date-fns/locale/pt-BR';
 import AddCardButton from "../components/AddCardButton"
 import Column from "../components/Column"
 import Toast from "../components/Toast"
@@ -11,6 +9,7 @@ import {
   dragStart, dragEnd, dragEnter, dragLeave, dropStart, drop,
   dismissNotification, showModalRequest, hideModal
 } from "../actions"
+import {diffBetweenDays,formatDate,formatTime } from "../util/date"
 
 const Funnel = (props) => (
   <div>
@@ -122,27 +121,6 @@ const mapDispatchToProps = dispatch => (
     onCardClick: (id) => dispatch(showModalRequest(id)),
     onModalExit: () => dispatch(hideModal())
   }
-)
-
-const diffBetweenDays = (firstDate, lastDate) => (
-  differenceInDays(
-    parseISO(firstDate),
-    parseISO(lastDate)
-  )
-)
-
-const formatDate = (date) => (
-  format(
-    parseISO(date),
-    'dd/MM/yyyy',{ locale: pt }
-  )
-)
-
-const formatTime = (date) => (
-  format(
-    parseISO(date),
-    'HH:mm',{ locale: pt }
-  )
 )
 
 export default connect(
